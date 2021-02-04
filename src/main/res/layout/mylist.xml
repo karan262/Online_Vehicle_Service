@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:layout_marginLeft="20dp"
+        android:text="Name"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shapebutton"
+        android:textColor="#FFFFFF"
+        android:id="@+id/btn"
+        android:layout_below="@+id/address"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="5dp"
+
+        android:text="Book"
+        />
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Locate"
+        android:layout_toRightOf="@+id/btn"
+        android:background="@drawable/shapebutton"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/address"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/Location"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/address"
+        android:layout_below="@+id/name"
+        android:text="address"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneno"
+
+        android:layout_alignParentEnd="true"
+        android:text="phoneno"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+</RelativeLayout>
