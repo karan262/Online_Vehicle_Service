@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,8 +26,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Register extends AppCompatActivity {
-    public static String URL_REGIST ="http://192.168.1.8/VehicleBook/Register.php";;
+    public static String URL_REGIST = "http://192.168.1.8/VehicleBook/Register.php";
     EditText name_e, mobile_number_e, email_e, password_e, c_password_e;
+    TextView loginLink;
     String name,email,password,mobile_number,c_password;
     Button btnReg;
     @Override
@@ -38,11 +40,19 @@ public class Register extends AppCompatActivity {
         email_e = (EditText) findViewById(R.id.Email);
         password_e = (EditText) findViewById(R.id.password);
         c_password_e = (EditText) findViewById(R.id.c_password);
-        btnReg=(Button) findViewById(R.id.submit);
+        btnReg = (Button) findViewById(R.id.submit);
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Regist();
+            }
+        });
+        loginLink = findViewById(R.id.loginLink);
+        loginLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Register.this, Login.class);
+                startActivity(intent);
             }
         });
     }

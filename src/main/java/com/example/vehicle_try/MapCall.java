@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -22,65 +24,59 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class MapCall extends AppCompatActivity {
-//    String Place=getIntent().getStringExtra("place");
-    double latitude,longitude;
-    public int locationStatus;
-    public int backpress=0;
+    //    String Place=getIntent().getStringExtra("place");
+    double latitude, longitude;
+    public int locationStatus, gpsStatus = 0;
+    public int backpress = 0;
+
+
     private static final int ACCESS_CORE_LOCATION_PERMISSION_CODE = 100;
     private static final int ACCESS_FINE_LOCATION_PERMISSION_CODE = 101;
     String value;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        if (ContextCompat.checkSelfPermission(MapCall.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
-//
-//            // Requesting the permission
-//            ActivityCompat.requestPermissions(MapCall.this,
-//                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION },
-//                    ACCESS_FINE_LOCATION_PERMISSION_CODE);
-//        }
-//        else {
-//            SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
-//            value = sharedPreferences.getString("value","");
-//            mapcall();
-//        }
-        if(off==0){
-            Intent onGPS = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(onGPS);
+        if (ContextCompat.checkSelfPermission(MapCall.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
+
+            // Requesting the permission
+            ActivityCompat.requestPermissions(MapCall.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    ACCESS_FINE_LOCATION_PERMISSION_CODE);
         }
-        System.out.println(value);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
+        value = sharedPreferences.getString("value", "");
+        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("To Continue you must turn on your Gps")
+                    .setCancelable(false)
+                    .setPositiveButton("Turn on ", new DialogInterface.OnClickListener() {
+                        public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                            startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                            dialog.cancel();
+                            Intent intent = new Intent(MapCall.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+            final AlertDialog alert = builder.create();
+            alert.show();
+
+        } else {
+            mapcall();
+        }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode,
-//                                           @NonNull String[] permissions,
-//                                           @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode,
-//                        permissions,
-//                        grantResults);
-//
-//        if (requestCode == ACCESS_FINE_LOCATION_PERMISSION_CODE) {
-//            if (grantResults.length > 0
-//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                Toast.makeText(MapCall.this,
-//                        "Camera Permission Granted",
-//                        Toast.LENGTH_SHORT)
-//                        .show();
-//            } else {
-//                Toast.makeText(MapCall.this,
-//                        "Camera Permission Denied",
-//                        Toast.LENGTH_SHORT)
-//                        .show();
-//            }
-//        }
-//    }
         LocationManager locationManager;
-//    public void checkPermission(String permission, int requestCode)
-//    {
-//
-//    }
-    public void mapcall(){
+
+    public void mapcall() {
 
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -117,10 +113,12 @@ public class MapCall extends AppCompatActivity {
         } catch (SecurityException e) {
             e.printStackTrace();
         }
-                System.out.println(latitude+" ,"+longitude);
-        Uri gmmIntentUri = Uri.parse("geo:" + latitude + "," + longitude +"?q="+value);
+        System.out.println(latitude + " ," + longitude);
+        Uri gmmIntentUri = Uri.parse("geo:" + latitude + "," + longitude + "?q=" + value);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
+
     }
+
 }

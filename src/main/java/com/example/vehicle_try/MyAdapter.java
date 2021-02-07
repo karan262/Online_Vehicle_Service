@@ -54,8 +54,13 @@ public class MyAdapter extends ArrayAdapter<String>{
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity mainActivity=new MainActivity();
-                mainActivity.networkCall((String) list_txt1.getText());
+                SharedPreferences sharedPreferences = context.getSharedPreferences("myKey", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("id", id[position]);
+                editor.putString("value", (String) list_txt1.getText());
+                editor.apply();
+                Intent intent = new Intent(getContext(), BookService.class);
+                context.startActivity(intent);
             }
         });
 
@@ -71,7 +76,6 @@ public class MyAdapter extends ArrayAdapter<String>{
 
 
                 Intent intent=new Intent(getContext(),MapCall.class);
-                intent.putExtra("place",(String)list_txt3.getText());
                 context.startActivity(intent);
 
 
