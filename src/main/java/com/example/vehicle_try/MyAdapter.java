@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,9 @@ public class MyAdapter extends ArrayAdapter<String>{
         list_txt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(phoneno[position]);
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + list_txt2.getText()));
+                context.startActivity(intent);
             }
         });
         btn.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +59,7 @@ public class MyAdapter extends ArrayAdapter<String>{
             public void onClick(View view) {
                 SharedPreferences sharedPreferences = context.getSharedPreferences("myKey", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("id", id[position]);
+                editor.putString("service_id", id[position]);
                 editor.putString("value", (String) list_txt1.getText());
                 editor.apply();
                 Intent intent = new Intent(getContext(), BookService.class);

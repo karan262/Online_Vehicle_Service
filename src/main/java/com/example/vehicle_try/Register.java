@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Register extends AppCompatActivity {
-    public static String URL_REGIST = "http://192.168.1.8/VehicleBook/Register.php";
+    public static String URL_REGIST = IpAddressGet.getIp() + "Register.php";
     EditText name_e, mobile_number_e, email_e, password_e, c_password_e;
     TextView loginLink;
     String name,email,password,mobile_number,c_password;
@@ -35,6 +35,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().hide();
         name_e = (EditText) findViewById(R.id.userName);
         mobile_number_e = (EditText) findViewById(R.id.Phone);
         email_e = (EditText) findViewById(R.id.Email);
@@ -91,8 +92,9 @@ public class Register extends AppCompatActivity {
 
                                 if (success.equals("1")) {
                                     Toast.makeText(Register.this, responseDescription, Toast.LENGTH_SHORT).show();
-                                    Intent io = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent io = new Intent(getApplicationContext(), Login.class);
                                     startActivity(io);
+                                    finish();
                                 }
                                 else
                                 {

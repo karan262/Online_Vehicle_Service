@@ -1,9 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CurrentStatus">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textColor="@color/colorAccent"
+        android:background="#2C2424"
+
+        android:layout_marginTop="20dp"
+        android:id="@+id/TitleName"
+        android:textStyle="bold|italic"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Current_Name"
+        android:layout_marginTop="27dp"
+        android:layout_marginLeft="200dp"
+        android:text="Name"
+        android:textColor="#2C2424"
+        android:background="@color/colorAccent"
+        android:textSize="15sp"
+
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/TitleName"
+        android:layout_margin="20dp"
+        android:background="#F1DD66" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TitlePhone"
+        android:layout_marginTop="55dp"
+        android:text="Phone_Number"
+        android:textColor="@color/colorAccent"
+        android:background="#2C2424"
+
+        android:layout_below="@+id/TitleName"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"></TextView>
+
+    <TextView
+        android:id="@+id/C_Phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Current_Name"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="200dp"
+        android:text="Phone Number"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:layout_below="@id/TitlePhone"
+        android:layout_margin="20dp"
+        android:background="#F1DD66" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:id="@+id/TitleDate"
+        android:textColor="@color/colorAccent"
+        android:background="#2C2424"
+        android:layout_marginTop="55dp"
+        android:layout_below="@id/TitlePhone"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/C_DateofBooking"
+        android:text="Date of Service"
+        android:textSize="20sp"
+        android:textColor="#2C2424"
+        android:background="@color/colorAccent"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="200dp"
+
+        android:layout_below="@id/C_Phone" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/TitleDate"
+        android:layout_margin="20dp"
+        android:background="#F1DD66" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        android:id="@+id/TitleStatus"
+        android:textColor="@color/colorAccent"
+        android:background="#2C2424"
+        android:layout_marginTop="55dp"
+        android:layout_below="@id/TitleDate"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/C_Status"
+        android:text="Current Service"
+        android:textSize="20sp"
+        android:textColor="#2C2424"
+        android:background="@color/colorAccent"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="200dp"
+        android:layout_below="@id/C_DateofBooking" />
+</RelativeLayout>

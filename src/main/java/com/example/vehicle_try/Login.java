@@ -29,16 +29,18 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
     Button btnlogin;
-    EditText email, password;
+    EditText emailText, password;
     TextView reglink;
-    String Mob_No, name, u_id;
-    public static String Login_Url = "http://192.168.1.8/VehicleBook/Login.php";
+    String Mob_No, name, u_id, email;
+    public static String Login_Url = IpAddressGet.getIp() + "Login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        email = findViewById(R.id.emailLogin);
+        getSupportActionBar().hide();
+
+        emailText = findViewById(R.id.emailLogin);
         password = findViewById(R.id.passwordLogin);
         reglink = findViewById(R.id.reglink);
         btnlogin = findViewById(R.id.loginbtn);
@@ -58,7 +60,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void login() {
-        final String memail = this.email.getText().toString().trim();
+        final String memail = this.emailText.getText().toString().trim();
         final String mpassword = this.password.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Login_Url,
@@ -75,29 +77,28 @@ public class Login extends AppCompatActivity {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);// name="",email=",id=""
                                     name = object.getString("name").trim();
-                                    String email = object.getString("email").trim();
+                                    email = object.getString("email").trim();
                                     Mob_No = object.getString("Mobile_Number").trim();
                                     u_id = object.getString("id").trim();
-
 //                                    Toast.makeText(MainActivity.this, "login success  ", Toast.LENGTH_SHORT).show();
 
                                 }
+                                SaveSharedPreference.setUserName(getApplicationContext(), name);
                                 SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("userId", memail);
+                                editor.putString("userId", email);
                                 editor.putString("Mob_No", Mob_No);
                                 editor.putString("U_Name", name);
                                 editor.putString("U_id", u_id);
                                 editor.apply();
                                 Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(Login.this, "Username or Password is Invalid", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
                             Toast.makeText(Login.this, "login fail" + e.toString(), Toast.LENGTH_SHORT).show();
-                            // reg.setVisibility(View.GONE);
                         }
                     }
                 }, new Response.ErrorListener() {

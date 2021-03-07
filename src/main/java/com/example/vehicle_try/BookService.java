@@ -30,9 +30,9 @@ import java.util.Map;
 
 public class BookService extends AppCompatActivity {
     double latitude, longitude;
-    String s_name, u_name, id, mobile;
+    String s_name, u_name, id, mobile, userName, U_id;
     boolean flag = true;
-    public static final String URL_FETCH = "http://192.168.1.8/VehicleBook/Book.php";
+    public static final String URL_FETCH = IpAddressGet.getIp() + "Book.php";
     public int locationStatus, gpsStatus = 0;
 
     @Override
@@ -42,8 +42,11 @@ public class BookService extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
         s_name = sharedPreferences.getString("value", "");
         u_name = sharedPreferences.getString("userId", "");
-        id = sharedPreferences.getString("id", "");
+        id = sharedPreferences.getString("service_id", "");
+        Toast.makeText(this, id + "     ********************************     ", Toast.LENGTH_SHORT).show();
         mobile = sharedPreferences.getString("Mob_No", "");
+        U_id = sharedPreferences.getString("U_id", "");
+        userName = sharedPreferences.getString("U_Name", "");
         System.out.println("******************************" + " " + s_name);
         System.out.println("******************************" + " " + u_name);
         System.out.println("******************************" + " " + id);
@@ -81,8 +84,7 @@ public class BookService extends AppCompatActivity {
                             flag = false;
                             SendData(latitude, longitude);
                         }
-                        Log.i("LOCATION", "Latitude:" + latitude + ", Longitude:" + longitude);
-                        Toast.makeText(getApplicationContext(), "Latitude:" + latitude + ", Longitude:" + longitude, Toast.LENGTH_SHORT).show();
+
                         //getWeaterData(longitude, latitude);
                     }
 
@@ -127,9 +129,18 @@ public class BookService extends AppCompatActivity {
                             if (success.equals("1")) {
                                 Toast.makeText(BookService.this, responseDescription, Toast.LENGTH_SHORT).show();
                                 Intent io = new Intent(getApplicationContext(), MainActivity.class);
+                                io.putExtra("Response Description", responseDescription);
                                 startActivity(io);
+                            } else if (success.equals(("2"))) {
+                                Toast.makeText(BookService.this, responseDescription, Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("Response Description", responseDescription);
+                                startActivity(intent);
                             } else {
                                 Toast.makeText(BookService.this, responseDescription, Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("Response Description", responseDescription);
+                                startActivity(intent);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -152,6 +163,9 @@ public class BookService extends AppCompatActivity {
                 params.put("S_name", s_name);
                 params.put("UserId", u_name);
                 params.put("Mob_no", mobile);
+                params.put("UserName", userName);
+                params.put("U_id", U_id);
+
                 params.put("Latitude", Double.toString(latitude));
                 params.put("Longitude", Double.toString(longitude));
 

@@ -9,17 +9,20 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logoicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logoicon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BookService"></activity>
+        <activity android:name=".CurrentStatus"></activity>
+        <activity android:name=".UpdateProfile" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".BookService" />
         <activity android:name=".HistoryBook" />
         <activity android:name=".Payments" />
-        <activity android:name=".Dashboard" />
-        <activity android:name=".Login" />
+        <activity android:name=".Dashboard"></activity>
+        <activity android:name=".Login"></activity>
         <activity android:name=".Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

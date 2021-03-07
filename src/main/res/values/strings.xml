@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">vehicle_try</string>
+    <string name="app_name">Online Vehicle Service</string>
+    <string name="menu"></string>
+    <!--       <font color="#FF0000">Menu</font> </string>-->
 </resources>

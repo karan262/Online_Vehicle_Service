@@ -23,12 +23,12 @@
         android:id="@+id/BookService"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/shapebutton"
         android:text="Book Service"
-        android:textSize="20sp"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,12 +38,12 @@
         android:id="@+id/MakePayment"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/shapebutton"
         android:text="Make Payment"
-        android:textSize="20sp"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
         android:id="@+id/HistoryService"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/shapebutton"
         android:text="My Bookings "
         android:textAllCaps="false"
@@ -63,4 +63,53 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MakePayment" />
+
+    <Button
+        android:id="@+id/CurrentServiceStatus"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shapebutton"
+        android:text="Current Service Status "
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HistoryService" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navibottom"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        android:theme="@style/BottomNavigationTheme"
+        android:overScrollMode="ifContentScrolls"
+        android:scrollbarStyle="outsideInset"
+        app:itemIconSize="25dp"
+        app:menu="@menu/menu_nav"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="660dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="92dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="@+id/navibottom"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

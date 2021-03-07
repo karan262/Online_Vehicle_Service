@@ -6,6 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/name"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:text="Name"
         android:textSize="20sp"
@@ -19,9 +20,10 @@
         android:background="@drawable/shapebutton"
         android:textColor="#FFFFFF"
         android:id="@+id/btn"
+
         android:layout_below="@+id/address"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
 
         android:text="Book"
         />
@@ -34,7 +36,7 @@
         android:textColor="#FFFFFF"
         android:layout_below="@+id/address"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/Location"
         />
 
@@ -42,20 +44,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/address"
-        android:layout_below="@+id/name"
+        android:layout_below="@+id/phoneno"
         android:text="address"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:textSize="20sp"
         android:textColor="@color/black"
         />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/phoneno"
-
-        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/name"
+        android:layout_marginLeft="20dp"
         android:text="phoneno"
         android:textSize="20sp"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/colorPrimary" />
 </RelativeLayout>

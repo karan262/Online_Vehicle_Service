@@ -1,5 +1,6 @@
 package com.example.vehicle_try;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,6 +11,8 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,13 +40,14 @@ import com.google.gson.JsonObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String UrlFetchData="http://192.168.1.8/VehicleBook/ListData_new.php";
+    public String UrlFetchData = IpAddressGet.getIp() + "ListData_new.php";
     String[] id;
     String[] servicecentername;
     String[] phoneno;
     String[] address;
     String[] area;
-    ListView listView ;
+    String toastMsg;
+    ListView listView;
     RequestQueue queue;
     Context context;
     JsonArray array;
@@ -57,10 +61,18 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView=(ListView)findViewById(R.id.lst);
-        context=this;
+        listView = (ListView) findViewById(R.id.lst);
+        context = this;
 
         queue = Volley.newRequestQueue(this);
+        Intent intent = getIntent();
+        intent.getExtras();
+
+
+        if (intent.hasExtra("Response Description")) {
+            toastMsg = intent.getStringExtra("Response Description");
+            Toast.makeText(context, toastMsg, Toast.LENGTH_SHORT).show();
+        }
 
 
         StringRequest makeRequest = new StringRequest(Request.Method.POST, UrlFetchData,
@@ -69,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(String res) {
                         System.out.println(res);
                         Gson gson = new Gson();
-                        if (res.contains("id") && res.contains("servicecentername") && res.contains("address") ) {
+                        if (res.contains("id") && res.contains("servicecentername") && res.contains("address")) {
 
                             array = gson.fromJson(res, JsonArray.class);
                             id = new String[array.size()];
@@ -111,4 +123,5 @@ public class MainActivity extends AppCompatActivity {
                     };
                             queue.add(makeRequest);
     }
+
 }

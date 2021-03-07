@@ -16,6 +16,7 @@ public class Splashscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
         getSupportActionBar().hide();
+
         // tv=(TextView)findViewById(R.id.tv);
         iv = (ImageView) findViewById(R.id.iv);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.mytransition);
@@ -30,12 +31,22 @@ public class Splashscreen extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    startActivity(intent);
-                    finish();
+
+                    if (SaveSharedPreference.getUserName(Splashscreen.this).length() == 0) {
+                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         };
         timer.start();
 
     }
+
+
 }
